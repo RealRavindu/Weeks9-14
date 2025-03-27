@@ -10,6 +10,8 @@ public class Knight : MonoBehaviour
     public bool canRun = true;
     public List<AudioClip> footstepSoundList = new List<AudioClip>();
     public AudioSource audiosource;
+    public Coroutine jumping;
+    public float t;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +37,12 @@ public class Knight : MonoBehaviour
             transform.position += transform.right * direction * speed * Time.deltaTime;
         }
 
+        if (Input.GetKeyDown("Spacebar") & canRun)
+        {
+            animator.SetTrigger("Jump");
+            jumping = StartCoroutine(Jump());
+            
+        }
 
     }
 
@@ -49,5 +57,12 @@ public class Knight : MonoBehaviour
         Debug.Log("Footstep!");
         audiosource.clip = footstepSoundList[(int)Random.Range(0, 10)];
         audiosource.Play();
+    }
+
+    public IEnumerator Jump()
+    {
+
+
+        yield return null;
     }
 }
