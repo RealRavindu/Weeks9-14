@@ -8,6 +8,8 @@ public class Knight : MonoBehaviour
     Animator animator;
     public float speed = 2;
     public bool canRun = true;
+    public List<AudioClip> footstepSoundList = new List<AudioClip>();
+    public AudioSource audiosource;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,5 +42,12 @@ public class Knight : MonoBehaviour
     {
         Debug.Log("Attack animation has finished");
         canRun = true;
+    }
+
+    public void FootHasLanded()
+    {
+        Debug.Log("Footstep!");
+        audiosource.clip = footstepSoundList[(int)Random.Range(0, 10)];
+        audiosource.Play();
     }
 }
