@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class GroundScript : MonoBehaviour
 {
     SpriteRenderer sr;
+    public UnityEvent onClick;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,9 +20,10 @@ public class GroundScript : MonoBehaviour
         mousePos.z = transform.position.z;
         if (sr.bounds.Contains(mousePos) && Input.GetMouseButtonDown(0))
         {
-            //Debug.Log(mousePos);
-
+            onClick.Invoke();
         }
        
     }
+
+
 }
