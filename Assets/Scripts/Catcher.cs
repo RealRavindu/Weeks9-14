@@ -6,16 +6,15 @@ public class Catcher : MonoBehaviour
 {
     public LogicManager logicManager;
     public Coroutine outsideZone;
-    private float speed = 5.3f;
+    public float speed = 5.3f;
     public GameObject runner;
     private SpriteRenderer sr;
-    float t;
+    public float t;
     // Start is called before the first frame update
     void Start()
     {
         
         sr = gameObject.GetComponent<SpriteRenderer>();
-        outsideZone = StartCoroutine(timer());
     }
 
     // Update is called once per frame
@@ -72,6 +71,11 @@ public class Catcher : MonoBehaviour
             yield return null;
         }
 
+    }
+
+    public void startTimerCoroutine()
+    {
+        outsideZone = StartCoroutine(timer());
     }
 
     public void catcherDeath()
