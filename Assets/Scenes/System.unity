@@ -132,7 +132,6 @@ GameObject:
   m_Component:
   - component: {fileID: 145646376}
   - component: {fileID: 145646375}
-  - component: {fileID: 145646374}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -140,21 +139,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &145646374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 145646373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c923074cdb9b5424d921889afdad5758, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onClick:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!212 &145646375
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -216,8 +200,8 @@ Transform:
   m_GameObject: {fileID: 145646373}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 18.91496, y: 10.298988, z: 1}
+  m_LocalPosition: {x: -0, y: -0, z: 0}
+  m_LocalScale: {x: 18.654835, y: 9.996394, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -384,7 +368,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -441,8 +425,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efd397f3d118cc246ae74316070a1a14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runner: {fileID: 0}
-  sr: {fileID: 0}
+  logicManager: {fileID: 1827213649}
+  runner: {fileID: 419126556}
 --- !u!212 &1424979677
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -483,7 +467,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -510,6 +494,64 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1827213648
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1827213650}
+  - component: {fileID: 1827213649}
+  m_Layer: 0
+  m_Name: LogicManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1827213649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1827213648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b63d46909a4bd1478fdbc056cb967d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runnerDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  catcherDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  collision:
+    m_PersistentCalls:
+      m_Calls: []
+  runner: {fileID: 419126557}
+  catcher: {fileID: 1424979676}
+  runnerSFPrefab: {fileID: 8957803424092930261, guid: 1987100eb3e4c924d9f135468fa36a17, type: 3}
+  catcherSFPrefab: {fileID: 5013794185645612689, guid: bb5096ab1651fbf46ae8a12598197fdd, type: 3}
+  ground: {fileID: 145646373}
+--- !u!4 &1827213650
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1827213648}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -518,3 +560,4 @@ SceneRoots:
   - {fileID: 145646376}
   - {fileID: 419126559}
   - {fileID: 1424979678}
+  - {fileID: 1827213650}

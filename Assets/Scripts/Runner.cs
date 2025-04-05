@@ -45,10 +45,13 @@ public class Runner : MonoBehaviour
             t += Time.deltaTime;
             float green = sr.color.g - (0.24f * Time.deltaTime);
             float blue = sr.color.b - (0.24f * Time.deltaTime);
+            
+            //if statement used to get when objects were completely red
             if (sr.color.g < 0)
             {
-                Debug.Log("Time for become red: " + t);
+                //Debug.Log("Time for catcher red: " + t);
             }
+
             Color modifiedColor = new Color(sr.color.r, green, blue);
             sr.color =modifiedColor;
             if (t > 5)
