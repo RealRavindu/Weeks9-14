@@ -61,7 +61,6 @@ public class Runner : MonoBehaviour
             yield return null;
         }
         runnerDeath();
-        StopCoroutine(outsideZone);
         
     }
 

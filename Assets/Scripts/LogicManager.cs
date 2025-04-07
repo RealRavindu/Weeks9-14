@@ -46,28 +46,37 @@ public class LogicManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach(GameObject S in runnerSafeZones)
+        if (runnerSafeZones[0].GetComponent<SpriteRenderer>().bounds.Contains(runner.transform.position))
         {
-            if (S.GetComponent<SpriteRenderer>().bounds.Contains(runner.transform.position))
-            {
-                runner.t = 0;
-                Debug.Log("runner in safezone");
-                collision.RemoveAllListeners();
-                runnerLeftSF.AddListener(runner.startTimerCoroutine);
-                runner.StopAllCoroutines();
-                isOutside = false;
-                break;
-            } else
-            {
-                isOutside = true;
-            }
+            runner.t = 0;
+            Debug.Log("runner in safezone");
+            collision.RemoveAllListeners();
+            runnerLeftSF.AddListener(runner.startTimerCoroutine);
+            runner.StopAllCoroutines();
+            isOutside = false;
+            Debug.Log("Runner is inside");
         }
-
-        if (isOutside)
+        else if (runnerSafeZones[0].GetComponent<SpriteRenderer>().bounds.Contains(runner.transform.position))
         {
+            runner.t = 0;
+            Debug.Log("runner in safezone");
+            collision.RemoveAllListeners();
+            runnerLeftSF.AddListener(runner.startTimerCoroutine);
+            runner.StopAllCoroutines();
+            isOutside = false;
+            Debug.Log("Runner is inside");
+        } else
+            {
+            Debug.Log("runner outside");
             runnerLeftSF.Invoke();
             runnerLeftSF.RemoveAllListeners();
             collision.AddListener(callRunnerDeath);
+        }
+        
+
+        if (isOutside)
+        {
+            
         }
 
         foreach (GameObject S in catcherSafeZones)
