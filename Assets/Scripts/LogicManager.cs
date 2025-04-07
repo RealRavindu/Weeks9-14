@@ -17,28 +17,28 @@ public class LogicManager : MonoBehaviour
     public GameObject ground;
     private List<GameObject> runnerSafeZones = new List<GameObject>();
     private List<GameObject> catcherSafeZones = new List<GameObject>();
-    private bool isOutside;
+    public bool isInside = true;
     // Start is called before the first frame update
     void Start()
     {
-        
+
         //spawning 2 runner safezones on either side of the ground by multiplying the width of the ground subtracted with it's own scale by -1 and then 1 to get either side of the ground.
-        for (int i = -1; i < 2; i+=2)
+        for (int i = -1; i < 2; i += 2)
         {
             GameObject spawnedZone = Instantiate(runnerSFPrefab);
-            spawnedZone.transform.position = new Vector3(i *( (ground.transform.localScale.x / 2) - (spawnedZone.transform.localScale.x / 2)), 0, 0);
+            spawnedZone.transform.position = new Vector3(i * ((ground.transform.localScale.x / 2) - (spawnedZone.transform.localScale.x / 2)), 0, 0);
             runnerSafeZones.Add(spawnedZone);
         }
 
-        for (int i = -1; i < 2; i ++)
+        for (int i = -1; i < 2; i++)
         {
-            for (int j = -1; j < 2; j+=2)
+            for (int j = -1; j < 2; j += 2)
             {
                 GameObject spawnedZone = Instantiate(catcherSFPrefab);
                 spawnedZone.transform.position = new Vector3(i * ((ground.transform.localScale.x / 2) - (spawnedZone.transform.localScale.x / 2)), j * ((ground.transform.localScale.y / 2) - (spawnedZone.transform.localScale.y / 2)), 0);
                 catcherSafeZones.Add(spawnedZone);
             }
-                
+
         }
 
     }
@@ -48,35 +48,24 @@ public class LogicManager : MonoBehaviour
     {
         if (runnerSafeZones[0].GetComponent<SpriteRenderer>().bounds.Contains(runner.transform.position))
         {
-            runner.t = 0;
-            Debug.Log("runner in safezone");
-            collision.RemoveAllListeners();
-            runnerLeftSF.AddListener(runner.startTimerCoroutine);
-            runner.StopAllCoroutines();
-            isOutside = false;
-            Debug.Log("Runner is inside");
-        }
-        else if (runnerSafeZones[0].GetComponent<SpriteRenderer>().bounds.Contains(runner.transform.position))
-        {
-            runner.t = 0;
-            Debug.Log("runner in safezone");
-            collision.RemoveAllListeners();
-            runnerLeftSF.AddListener(runner.startTimerCoroutine);
-            runner.StopAllCoroutines();
-            isOutside = false;
-            Debug.Log("Runner is inside");
-        } else
+            if (!isInside)
             {
+                runnerIsInsideSafezone();
+            }
+        }
+        else if (runnerSafeZones[1].GetComponent<SpriteRenderer>().bounds.Contains(runner.transform.position))
+        {
+            if (!isInside)
+            {
+                runnerIsInsideSafezone();
+            }
+        }
+        else if (isInside)
+        {
+            isInside = false;
             Debug.Log("runner outside");
             runnerLeftSF.Invoke();
-            runnerLeftSF.RemoveAllListeners();
             collision.AddListener(callRunnerDeath);
-        }
-        
-
-        if (isOutside)
-        {
-            
         }
 
         foreach (GameObject S in catcherSafeZones)
@@ -84,7 +73,7 @@ public class LogicManager : MonoBehaviour
             if (S.GetComponent<SpriteRenderer>().bounds.Contains(catcher.transform.position))
             {
                 catcher.t = 0;
-                Debug.Log("catcher in safezone");
+                //Debug.Log("catcher in safezone");
                 catcherLeftSF.AddListener(catcher.startTimerCoroutine);
                 catcher.StopAllCoroutines();
                 break;
@@ -99,6 +88,15 @@ public class LogicManager : MonoBehaviour
 
     }
 
+    public void runnerIsInsideSafezone()
+    {
+        
+        
+        collision.RemoveAllListeners();
+        runner.stopTimerCoroutine();
+        Debug.Log("Runner is inside SF");
+        isInside = true;
+    }
     public void callRunnerDeath()
     {
         runnerDeath.Invoke();

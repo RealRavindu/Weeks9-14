@@ -560,18 +560,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 419126557}
-        m_TargetAssemblyTypeName: Runner, Assembly-CSharp
-        m_MethodName: testingEvent
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   catcherLeftSF:
     m_PersistentCalls:
       m_Calls: []
@@ -595,6 +583,7 @@ MonoBehaviour:
   runnerSFPrefab: {fileID: 8957803424092930261, guid: 1987100eb3e4c924d9f135468fa36a17, type: 3}
   catcherSFPrefab: {fileID: 5013794185645612689, guid: bb5096ab1651fbf46ae8a12598197fdd, type: 3}
   ground: {fileID: 145646373}
+  isInside: 0
 --- !u!4 &1827213650
 Transform:
   m_ObjectHideFlags: 0

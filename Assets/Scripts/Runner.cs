@@ -2,20 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using static Unity.Collections.Unicode;
 
 public class Runner : MonoBehaviour
 {
-    Coroutine testingcrs;
-    Coroutine outsideZone;
+    public Coroutine outsideZone;
     SpriteRenderer sr;
     public float speed = 5f;
     public float t;
-    private bool isAlive=true;
+    private bool isAlive = true;
     // Start is called before the first frame update
     void Start()
     {
 
-        testingcrs = StartCoroutine(testing());
         sr = gameObject.GetComponent<SpriteRenderer>();
     }
 
@@ -44,43 +43,47 @@ public class Runner : MonoBehaviour
     public IEnumerator timer()
     {
         Debug.Log("RUNNER TIMER HAS BEEN STARTED");
-        while (t<5)
+        while (t < 5)
         {
+            //Debug.Log("Runner timer is ticking: " + t);
             t += Time.deltaTime;
-            float green = sr.color.g - (0.24f * Time.deltaTime);
-            float blue = sr.color.b - (0.24f * Time.deltaTime);
-            
-            //if statement used to get when objects were completely red
-            if (sr.color.g < 0)
-            {
-                //Debug.Log("Time for catcher red: " + t);
-            }
-
-            Color modifiedColor = new Color(sr.color.r, green, blue);
-            sr.color =modifiedColor;
+            colorChanger();
             yield return null;
         }
+        Debug.Log("Runner has been killed");
         runnerDeath();
-        
+
     }
 
-    public IEnumerator testing()
-    {
-        while (true)
-        {
-            Debug.Log("test");
-            yield return null;
-        }
-    }
 
     public void startTimerCoroutine()
     {
         outsideZone = StartCoroutine(timer());
     }
 
-    public void testingEvent()
+    public void stopTimerCoroutine()
     {
-        Debug.Log("EVENT IS PROCCING");
+         t = 0;
+        colorChanger();
+        if (outsideZone != null)
+        {
+            StopCoroutine(outsideZone);
+        }
+    }
+
+    public void colorChanger()
+    {
+        float green = (1 - t / 5f);
+        float blue = (1 - t / 5f);
+
+        //if statement used to get when objects were completely red
+        if (sr.color.g < 0)
+        {
+            //Debug.Log("Time for catcher red: " + t);
+        }
+
+        Color modifiedColor = new Color(sr.color.r, green, blue);
+        sr.color = modifiedColor;
     }
     public void runnerDeath()
     {

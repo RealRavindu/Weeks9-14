@@ -51,9 +51,9 @@ public class Catcher : MonoBehaviour
         while (true)
         {
             t += Time.deltaTime;
-            float green = sr.color.g - (0.32f * Time.deltaTime);
-            float blue = sr.color.b - (0.32f * Time.deltaTime);
-            
+            float green = (1 - t / 3.5f);
+            float blue = (1 - t / 3.5f);
+
             //if statement used to get when objects were completely red
             if (sr.color.g < 0)
             {
