@@ -63,8 +63,6 @@ public class Runner : MonoBehaviour
 
     public void stopTimerCoroutine()
     {
-         t = 0;
-        colorChanger();
         if (outsideZone != null)
         {
             StopCoroutine(outsideZone);
