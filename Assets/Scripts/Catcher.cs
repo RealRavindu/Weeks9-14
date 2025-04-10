@@ -7,6 +7,7 @@ public class Catcher : MonoBehaviour
     public LogicManager logicManager;
     public Coroutine outsideZone;
     public float speed = 5.3f;
+    public bool isAlive = true;
     public GameObject runner;
     private SpriteRenderer sr;
     public float t;
@@ -20,19 +21,19 @@ public class Catcher : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W) && isAlive)
         {
             transform.position += Vector3.up * speed * Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S)&& isAlive)
         {
             transform.position += Vector3.down * speed * Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) && isAlive)
         {
             transform.position += Vector3.left * speed * Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) && isAlive)
         {
             transform.position += Vector3.right * speed * Time.deltaTime;
         }
@@ -50,6 +51,7 @@ public class Catcher : MonoBehaviour
     {
         while (true)
         {
+            Debug.Log("catcher timer is ticking");
             t += Time.deltaTime;
             float green = (1 - t / 3.5f);
             float blue = (1 - t / 3.5f);
@@ -81,5 +83,6 @@ public class Catcher : MonoBehaviour
     public void catcherDeath()
     {
         Debug.Log("Catcher died!");
+        isAlive = false;
     }
 }

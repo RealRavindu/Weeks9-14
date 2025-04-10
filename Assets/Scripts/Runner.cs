@@ -45,12 +45,11 @@ public class Runner : MonoBehaviour
         Debug.Log("RUNNER TIMER HAS BEEN STARTED");
         while (t < 5)
         {
-            //Debug.Log("Runner timer is ticking: " + t);
+            Debug.Log("Runner timer is ticking: " + t);
             t += Time.deltaTime;
             colorChanger();
             yield return null;
         }
-        Debug.Log("Runner has been killed");
         runnerDeath();
 
     }
@@ -58,6 +57,7 @@ public class Runner : MonoBehaviour
 
     public void startTimerCoroutine()
     {
+        Debug.Log("Runner timer coroutine is started using function");
         outsideZone = StartCoroutine(timer());
     }
 
