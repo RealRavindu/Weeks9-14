@@ -38,15 +38,9 @@ public class Catcher : MonoBehaviour
             transform.position += Vector3.right * speed * Time.deltaTime;
         }
 
-        //checks for collision with circle by calculating the distance it's away from the center of the circle to the square and checking if it's within the x scale of the square.
-        //Since scale is same either way, it's a pretty accurate collision tester.
-        float distance = (runner.transform.position - transform.position).magnitude;
-        if (distance < transform.localScale.x)
-        {
-            logicManager.collision.Invoke();
-        }
+        
     }
-
+    /*The catcher has pretty much the same functionality as the runner, the runner has indepth explanations of everything going on here*/
     public IEnumerator timer()
     {
         while (true)
@@ -77,12 +71,26 @@ public class Catcher : MonoBehaviour
 
     public void startTimerCoroutine()
     {
-        outsideZone = StartCoroutine(timer());
+        if (outsideZone == null)
+        {
+            Debug.Log("Runner timer coroutine is started using function");
+            outsideZone = StartCoroutine(timer());
+        }
+    }
+
+    public void stopTimerCoroutine()
+    {
+        if (outsideZone != null)
+        {
+            StopCoroutine(outsideZone);
+            outsideZone = null;
+        }
     }
 
     public void catcherDeath()
     {
         Debug.Log("Catcher died!");
         isAlive = false;
+        StopCoroutine(outsideZone);
     }
 }
